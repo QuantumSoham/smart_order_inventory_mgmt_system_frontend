@@ -1,0 +1,20 @@
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <form #f="ngForm" (ngSubmit)="placeOrder(f)" class="checkout-form">
+
+    <input name="shippingName" ngModel placeholder="Full Name" required>
+    <input name="shippingPhone" ngModel placeholder="Phone" required>
+
+    <textarea name="shippingAddress" ngModel placeholder="Address" required></textarea>
+
+    <input name="city" ngModel placeholder="City" required>
+    <input name="state" ngModel placeholder="State" required>
+    <input name="pincode" ngModel placeholder="Pincode" required>
+
+    <div class="checkout-actions">
+      <button type="submit">Place Order</button>
+    </div>
+
+  </form>
+</div>

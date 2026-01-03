@@ -1,0 +1,31 @@
+<div class="inventory-container">
+
+  <div class="inventory-header">
+    <select [(ngModel)]="selectedWarehouseId" (change)="loadInventory()">
+      <option value="">-- Select Warehouse --</option>
+      <option *ngFor="let w of warehouses" [value]="w.id">
+        {{ w.name }}
+      </option>
+    </select>
+
+    <a routerLink="/cart">🛒 View Cart</a>
+  </div>
+
+  <div *ngIf="loading">Loading inventory...</div>
+
+  <div class="inventory-grid">
+    <div class="inventory-card" *ngFor="let item of inventory">
+      <img [src]="item.imageUrl">
+      <h3>{{ item.name }}</h3>
+      <p>₹ {{ item.price }}</p>
+      <p>Available: {{ item.available }}</p>
+
+      <button
+        [disabled]="item.available === 0"
+        (click)="addToCart(item)">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+</div>
