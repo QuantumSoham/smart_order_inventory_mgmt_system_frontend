@@ -1,1 +1,22 @@
-<p>invoice works!</p>
+<h2>My Invoices</h2>
+
+<div *ngIf="loading">Loading invoices...</div>
+
+<div *ngFor="let inv of invoices" class="invoice-card">
+
+  <p><strong>Invoice ID:</strong> {{ inv.invoiceId }}</p>
+  <p><strong>Order ID:</strong> {{ inv.orderId }}</p>
+  <p><strong>Amount:</strong> ₹{{ inv.amount }}</p>
+  <p><strong>Status:</strong> {{ inv.status }}</p>
+  <p><strong>Created:</strong> {{ inv.createdAt | date:'medium' }}</p>
+
+  <button
+    *ngIf="inv.status !== 'PAID'"
+    (click)="pay(inv.invoiceId)">
+    Pay Now
+  </button>
+
+  <span *ngIf="inv.status === 'PAID'">✅ Paid</span>
+
+  <hr>
+</div>
