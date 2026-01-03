@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class BillingService {
 
-  private billingUrl = 'http://localhost:8052'; // adjust if needed
+  private billingUrl = 'http://localhost:8051'; 
   private orderUrl = 'http://localhost:8051';
 
   constructor(private http: HttpClient) {}
