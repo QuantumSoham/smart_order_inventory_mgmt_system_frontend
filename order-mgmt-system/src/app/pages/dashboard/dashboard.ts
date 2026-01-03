@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BillingReportsService } from '../../services/billing-reports';
+import { BillingReportsService } from '../../core/services/billing-reports';
 import Chart from 'chart.js/auto';
 
 @Component({
