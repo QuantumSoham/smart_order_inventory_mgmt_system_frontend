@@ -1,31 +1,60 @@
-<h2>My Orders</h2>
+<h2 class="page-title">📦 My Orders</h2>
 
 <button class="refresh-btn" (click)="loadOrders()">
   🔄 Refresh Orders
 </button>
 
-<div *ngIf="loading" class="loading">
-  Loading orders...
-</div>
+<!-- <div *ngIf="loading" class=[this.loading]>
+  Fetching your orders...
+</div> -->
 
 <div *ngIf="error" class="error">
   {{ error }}
 </div>
 
-<div *ngIf="!loading && orders.length === 0">
-  No orders found.
+<div *ngIf="!loading && orders.length === 0" class="empty">
+  You haven’t placed any orders yet.
 </div>
 
-<div class="order-card" *ngFor="let order of orders">
-  <div class="order-header">
-    <span><strong>Order #{{ order.orderId }}</strong></span>
-    <span class="status" [ngClass]="getStatusClass(order.status)">
-      {{ order.status }}
-    </span>
-  </div>
+<div class="orders-container">
+  <div class="order-card" *ngFor="let order of orders">
 
-  <div class="order-body">
-    <p>Total Amount: ₹{{ order.totalAmount }}</p>
-    <p>Created At: {{ order.createdAt | date:'medium' }}</p>
+    <div class="order-header">
+      <div>
+        <div class="order-id">Order #{{ order.id }}</div>
+        <div class="order-date">
+          {{ order.createdAt | date:'medium' }}
+        </div>
+      </div>
+
+      <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+        {{ order.status }}
+      </span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="shipping">
+      <div class="section-title">Delivering to</div>
+      <div class="shipping-name">{{ order.shippingName }}</div>
+      <div class="shipping-address">
+        {{ order.shippingAddress }},
+        {{ order.city }},
+        {{ order.state }} - {{ order.pincode }}
+      </div>
+      <div class="shipping-phone">
+        📞 {{ order.shippingPhone }}
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="order-footer">
+      <div class="amount">
+        Total Amount
+        <span>₹ {{ order.totalAmount }}</span>
+      </div>
+    </div>
+
   </div>
 </div>

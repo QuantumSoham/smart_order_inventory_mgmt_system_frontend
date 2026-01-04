@@ -45,14 +45,15 @@ export class UserOrdersComponent implements OnInit {
     });
   }
 
-  getStatusClass(status: string): string {
-    switch (status) {
-      case 'CREATED': return 'status-created';
-      case 'APPROVED': return 'status-approved';
-      case 'PACKED': return 'status-packed';
-      case 'SHIPPED': return 'status-shipped';
-      case 'DELIVERED': return 'status-delivered';
-      default: return '';
-    }
+getStatusClass(status: string): string {
+  switch (status) {
+    case 'CREATED': return 'status-created';
+    case 'APPROVED': return 'status-approved';
+    case 'PACKED': return 'status-packed';
+    case 'SHIPPED': return 'status-shipped';
+    case 'DELIVERED': return 'status-delivered';
+    default: return '';
   }
+}
+
 }

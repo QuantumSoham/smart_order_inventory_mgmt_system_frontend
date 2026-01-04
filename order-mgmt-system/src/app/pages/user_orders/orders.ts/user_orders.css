@@ -1,11 +1,15 @@
+.page-title {
+  margin-bottom: 12px;
+}
+
 .refresh-btn {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding: 8px 14px;
-  cursor: pointer;
-  border-radius: 6px;
   border: none;
-  background-color: #1976d2;
+  border-radius: 6px;
+  background: #1976d2;
   color: white;
+  cursor: pointer;
 }
 
 .loading {
@@ -16,11 +20,21 @@
   color: red;
 }
 
+.empty {
+  color: #666;
+}
+
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .order-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 12px;
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .order-header {
@@ -29,9 +43,19 @@
   align-items: center;
 }
 
-.status {
-  padding: 4px 10px;
-  border-radius: 12px;
+.order-id {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.order-date {
+  font-size: 12px;
+  color: #777;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: bold;
 }
@@ -60,4 +84,41 @@
 .status-delivered {
   background: #c8e6c9;
   color: #1b5e20;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 12px 0;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.shipping-name {
+  font-weight: 600;
+}
+
+.shipping-address,
+.shipping-phone {
+  font-size: 13px;
+  color: #555;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+.amount span {
+  margin-left: 8px;
+  color: #2e7d32;
 }
