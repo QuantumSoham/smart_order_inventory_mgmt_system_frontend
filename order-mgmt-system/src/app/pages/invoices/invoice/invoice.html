@@ -1,0 +1,30 @@
+<h2>My Invoices</h2>
+
+<div *ngIf="loading" (click)="loadInvoices()">Loading invoices...</div>
+
+<div *ngFor="let inv of invoices" class="invoice-card">
+
+  <p><strong>Invoice ID:</strong> {{ inv.invoiceId }}</p>
+  <p><strong>Status:</strong> {{ inv.status }}</p>
+  <p><strong>Total Amount:</strong> ₹{{ inv.totalAmount }}</p>
+  
+  <div>
+    <strong>Items:</strong>
+    <ul>
+      <li *ngFor="let item of inv.items">
+        Product ID: {{ item.productId }} |
+        Qty: {{ item.quantity }}
+      </li>
+    </ul>
+  </div>
+
+  <button
+    *ngIf="inv.status === 'UNPAID'"
+    (click)="pay(inv.invoiceId)">
+    Pay Now
+  </button>
+
+  <span *ngIf="inv.status === 'PAID'">✅ Paid</span>
+
+  <hr>
+</div>
