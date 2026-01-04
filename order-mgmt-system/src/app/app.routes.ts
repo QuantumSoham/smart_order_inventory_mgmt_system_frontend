@@ -4,8 +4,10 @@ import {  CartPage } from './pages/cart/cart';
 import { CheckoutComponent } from './pages/checkout/checkout';
 import { DashboardPage } from './pages/dashboard/dashboard';
 import { InvoicesComponent } from './pages/invoices/invoice/invoice';
+import { LoginPage } from './pages/auth/login/login.component/login.component';
 
 export const routes: Routes = [
+   { path: 'login', component: LoginPage },
       { path: '', component: InventoryPage },
   { path: 'cart', component: CartPage },
   {path:'checkout', component:CheckoutComponent},
