@@ -20,7 +20,7 @@ export class CheckoutComponent {
 
   placeOrder(form: any) {
     const payload = {
-      userId: 2, // hardcoding user id now till i get my rbac api gateway ready
+      userId: localStorage.getItem("userId") || 2, // hardcoding user id now till i get my rbac api gateway ready
       warehouseId: this.cartService.getWarehouseId(),
       shippingName: form.value.shippingName,
       shippingPhone: form.value.shippingPhone,

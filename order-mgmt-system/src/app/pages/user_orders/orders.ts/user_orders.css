@@ -1,0 +1,63 @@
+.refresh-btn {
+  margin-bottom: 15px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+}
+
+.loading {
+  font-style: italic;
+}
+
+.error {
+  color: red;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Status colors */
+.status-created {
+  background: #e0e0e0;
+  color: #424242;
+}
+
+.status-approved {
+  background: #bbdefb;
+  color: #0d47a1;
+}
+
+.status-packed {
+  background: #ffe0b2;
+  color: #e65100;
+}
+
+.status-shipped {
+  background: #e1bee7;
+  color: #4a148c;
+}
+
+.status-delivered {
+  background: #c8e6c9;
+  color: #1b5e20;
+}

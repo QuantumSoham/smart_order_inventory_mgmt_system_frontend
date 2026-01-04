@@ -1,0 +1,31 @@
+<h2>My Orders</h2>
+
+<button class="refresh-btn" (click)="loadOrders()">
+  🔄 Refresh Orders
+</button>
+
+<div *ngIf="loading" class="loading">
+  Loading orders...
+</div>
+
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && orders.length === 0">
+  No orders found.
+</div>
+
+<div class="order-card" *ngFor="let order of orders">
+  <div class="order-header">
+    <span><strong>Order #{{ order.orderId }}</strong></span>
+    <span class="status" [ngClass]="getStatusClass(order.status)">
+      {{ order.status }}
+    </span>
+  </div>
+
+  <div class="order-body">
+    <p>Total Amount: ₹{{ order.totalAmount }}</p>
+    <p>Created At: {{ order.createdAt | date:'medium' }}</p>
+  </div>
+</div>

@@ -9,7 +9,10 @@ import { forkJoin } from 'rxjs';
 })
 export class InvoicesComponent implements OnInit {
 
-  userId = 42; 
+  userId: number | null = (() => {
+    const raw = localStorage.getItem('userId');
+    return raw ? Number(raw) : null;
+  })();
   invoices: any[] = [];
   loading = false;
 
@@ -37,6 +40,10 @@ export class InvoicesComponent implements OnInit {
   // }
   loadInvoices() {
   this.loading = true;
+  if (this.userId == null) {
+    this.loading = false;
+    return;
+  }
 
   this.billingService.getOrdersByUser(this.userId)
     .subscribe(orders => {

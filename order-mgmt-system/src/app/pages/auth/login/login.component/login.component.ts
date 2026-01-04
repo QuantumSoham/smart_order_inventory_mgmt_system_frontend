@@ -12,7 +12,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 export class LoginPage {
 
   model = {
-    email: '',
+    credential: '',
     password: ''
   };
 

@@ -1,1 +1,18 @@
-<p>register.component works!</p>
+<h2>Register</h2>
+
+<form #f="ngForm" (ngSubmit)="register(f)">
+  <input name="name" placeholder="Name" [(ngModel)]="model.username" required />
+  <input name="email" placeholder="Email" [(ngModel)]="model.email" required />
+  <input type="password" name="password"
+         placeholder="Password"
+         [(ngModel)]="model.password"
+         required />
+ <select [(ngModel)]="model.role" name="role">
+    <option *ngFor="let r of roles" [value]="r">
+      {{ r }}
+    </option>
+  </select>
+  <button type="submit">Register</button>
+</form>
+
+<a routerLink="/login">Back to Login</a>

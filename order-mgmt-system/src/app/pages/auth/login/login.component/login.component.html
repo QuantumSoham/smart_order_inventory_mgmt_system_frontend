@@ -3,8 +3,8 @@
 <form #f="ngForm" (ngSubmit)="login(f)">
   <input
     name="email"
-    placeholder="Email"
-    [(ngModel)]="model.email"
+    placeholder="Username or email"
+    [(ngModel)]="model.credential"
     required />
 
   <input
