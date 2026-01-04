@@ -1,1 +1,37 @@
-<p>orders works!</p>
+<!-- orders.component.html -->
+ <h2>Order Summary</h2>
+ <button (click)="loadOrders()">Refresh Orders</button>
+<table class="table table-bordered" *ngIf="!loading">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User </th>
+      <th>Warehouse</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.id }}</td>
+      <td>{{ order.userId }}</td>
+      <td>{{ order.warehouseId }}</td>
+      <td>
+        <span class="badge bg-info">{{ order.status }}</span>
+      </td>
+      <td>{{ order.totalAmount }}</td>
+      <td>
+        <button
+  *ngIf="getNextStatus(order.status)"
+  class="btn btn-sm btn-primary"
+  (click)="confirmStatusChange(order)">
+  
+  Mark as {{ getNextStatus(order.status) }}
+</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>

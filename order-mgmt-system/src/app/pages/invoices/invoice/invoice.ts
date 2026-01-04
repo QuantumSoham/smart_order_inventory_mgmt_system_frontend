@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BillingService } from '../../../core/services/billing';
 import { forkJoin } from 'rxjs';
@@ -16,7 +16,9 @@ export class InvoicesComponent implements OnInit {
   invoices: any[] = [];
   loading = false;
 
-  constructor(private billingService: BillingService) {}
+  constructor(private billingService: BillingService,
+    private cdr:ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadInvoices();
@@ -49,13 +51,14 @@ export class InvoicesComponent implements OnInit {
     .subscribe(orders => {
 
       const requests = orders.map(o =>
-        this.billingService.getInvoiceByOrder(o.orderId)
+        this.billingService.getInvoiceByOrder(o.id)
       );
 
       forkJoin(requests).subscribe(invoices => {
         this.invoices = invoices; 
         this.loading = false;
       });
+      this.cdr.detectChanges();
     });
 }
 
