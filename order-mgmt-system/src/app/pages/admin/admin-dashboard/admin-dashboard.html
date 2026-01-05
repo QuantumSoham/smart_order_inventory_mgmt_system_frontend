@@ -1,1 +1,115 @@
-<p>admin-dashboard works!</p>
+<h2 class="title">Admin Analytics Dashboard</h2>
+
+<!-- KPI CARDS -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <h4>Total Orders</h4>
+    <p>{{ kpis.totalOrders }}</p>
+  </div>
+  <div class="kpi-card">
+    <h4>Total Revenue</h4>
+    <p>₹{{ kpis.totalRevenue }}</p>
+  </div>
+  <div class="kpi-card">
+    <h4>Avg Order Value</h4>
+    <p>₹{{ kpis.avgOrderValue | number:'1.0-0' }}</p>
+  </div>
+  <div class="kpi-card">
+    <h4>Delivered</h4>
+    <p>{{ kpis.deliveredOrders }}</p>
+  </div>
+</div>
+
+<!-- CHART GRID -->
+<div class="chart-grid">
+
+  <div class="chart-card">
+    <h3>Orders by Status</h3>
+    <canvas #statusCanvas></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Revenue Trend</h3>
+    <div class="date-filter compact">
+      <input type="date" [(ngModel)]="fromDate">
+      <input type="date" [(ngModel)]="toDate">
+      <button (click)="loadRevenueByDate()">Apply</button>
+    </div>
+    <canvas #revenueDateCanvas></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Revenue by Warehouse</h3>
+    <canvas #revenueWarehouseCanvas></canvas>
+  </div>
+
+  <!-- COMBINED CARD -->
+  <div class="chart-card split-card">
+    <div>
+      <h4>Orders by Warehouse</h4>
+      <canvas #warehouseCanvas></canvas>
+    </div>
+    <div>
+      <h4>Orders by State</h4>
+      <canvas #stateCanvas></canvas>
+    </div>
+  </div>
+
+</div>
+
+<!-- DATE FILTER -->
+<div class="date-filter">
+  <label>
+    From:
+    <input type="date" [(ngModel)]="fromDate">
+  </label>
+
+  <label>
+    To:
+    <input type="date" [(ngModel)]="toDate">
+  </label>
+
+  <button (click)="loadRevenueByDate()">Apply</button>
+</div>
+
+<!-- ORDERS BY STATUS -->
+<h2>📦 Orders by Status</h2>
+<div class="chip-grid">
+  <div *ngFor="let s of ordersByStatus"
+       class="chip status-{{ s.status.toLowerCase() }}">
+    {{ s.status }} — {{ s.count }}
+  </div>
+</div>
+<!-- REVENUE BY DATE -->
+<h2>📈 Revenue Trend</h2>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Revenue</th>
+  </tr>
+  <tr *ngFor="let r of revenueByDate">
+    <td>{{ r.date }}</td>
+    <td>₹ {{ r.revenue }}</td>
+  </tr>
+</table>
+
+<!-- REVENUE BY WAREHOUSE -->
+<h2>🏬 Revenue by Warehouse</h2>
+<table>
+  <tr>
+    <th>Warehouse</th>
+    <th>Revenue</th>
+  </tr>
+  <tr *ngFor="let w of revenueByWarehouse">
+    <td>#{{ w.warehouseId }}</td>
+    <td>₹ {{ w.revenue }}</td>
+  </tr>
+</table>
+
+<!-- ORDERS BY STATE -->
+<h2>🗺 Orders by State</h2>
+<div class="chip-grid">
+  <div *ngFor="let s of ordersByState" class="chip">
+    {{ s.state }} — {{ s.count }}
+  </div>
+</div>
