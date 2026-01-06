@@ -1,0 +1,35 @@
+.container {
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+}
+
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.danger {
+  background: #d9534f;
+  color: white;
+  border: none;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}

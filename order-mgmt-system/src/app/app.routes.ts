@@ -12,9 +12,11 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
 import { WarehouseListComponent } from './pages/admin/warehouse/warehouse-list.component/warehouse-list.component';
 import { CreateWarehouseComponent } from './pages/admin/warehouse/create-warehouse.component/create-warehouse.component';
 import { WarehouseDetailComponent } from './pages/admin/warehouse/warehouse-detail.component/warehouse-detail.component';
+import { ProductsComponent } from './pages/products/products.component/products.component';
 
 export const routes: Routes = [
   {path: 'warehouses',component: WarehouseListComponent  },
+  {path:'product-page',component:ProductsComponent},
   {path: 'warehouses/create',component: CreateWarehouseComponent  },
   {path: 'warehouses/:id',component: WarehouseDetailComponent  },
   { path: 'login', component: LoginPage },
