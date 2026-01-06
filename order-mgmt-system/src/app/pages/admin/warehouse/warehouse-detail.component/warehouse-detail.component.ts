@@ -62,10 +62,12 @@ updatePayload = {
   }
 
   loadLowStock() {
+    this.tab='lowStock';
     this.inventoryService.getLowStock()
       .subscribe(res =>
         this.lowStock = res.filter(l => l.warehouseId === this.warehouseId)
       );
+      console.log(this.lowStock);
   }
 
   addInventory() {
