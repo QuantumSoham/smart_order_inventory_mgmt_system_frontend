@@ -1,0 +1,33 @@
+<nav class="navbar" *ngIf="showNavbar">
+
+  <!-- LEFT -->
+  <div class="nav-left">
+    <a routerLink="/" class="logo">🛒 ShopAdmin</a>
+  </div>
+
+  <!-- HAMBURGER -->
+  <button class="hamburger" (click)="toggleMobileMenu()">
+    ☰
+  </button>
+
+  <!-- LINKS -->
+  <div class="nav-links" [class.open]="mobileMenuOpen">
+
+    <a routerLink="/" routerLinkActive="active">Inventory</a>
+    <a routerLink="/product-page" routerLinkActive="active">Products</a>
+    <a routerLink="/cart" routerLinkActive="active">Cart</a>
+    <a routerLink="/user-orders" routerLinkActive="active">My Orders</a>
+
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/invoices" routerLinkActive="active">Invoices</a>
+
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Admin Dashboard</a>
+    <a routerLink="/admin-orders" routerLinkActive="active">Admin Orders</a>
+    <a routerLink="/warehouses" routerLinkActive="active">Warehouses</a>
+    <a routerLink="/warehouses/create" routerLinkActive="active">Create Warehouse</a>
+
+    <a  class="btn-login" (click)="logout()">Logout</a>
+
+  </div>
+
+</nav>

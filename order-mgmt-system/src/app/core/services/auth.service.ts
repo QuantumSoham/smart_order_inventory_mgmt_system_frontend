@@ -45,6 +45,7 @@ export class AuthService {
     return this.http.post(`${this.base}/register`, payload);
   }
 
+  
   /* ---------------- LOGOUT ---------------- */
   logout() {
     localStorage.clear();
