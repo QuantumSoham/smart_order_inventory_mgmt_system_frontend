@@ -1,97 +1,154 @@
-<h2>{{ warehouse?.name }}</h2>
+<div class="page">
 
-<div class="meta">
-  <p><b>ID:</b> {{ warehouse?.id }}</p>
-  <p><b>Location:</b> {{ warehouse?.location }}</p>
-  <p><b>Status:</b> {{ warehouse?.active ? 'ACTIVE' : 'INACTIVE' }}</p>
-</div>
+  <!-- HEADER -->
+  <div class="warehouse-card">
+    <div class="warehouse-info">
+      <h2>{{ warehouse?.name }}</h2>
+      <p>
+        ID: {{ warehouse?.id }} • {{ warehouse?.location }}
+      </p>
+    </div>
 
-<!-- TABS -->
-<div class="tabs">
-  <button (click)="loadInventory()" [class.active]="tab==='inventory'">
-    Inventory
-  </button>
-  <button (click)="loadLowStock()" [class.active]="tab==='lowStock'">
-    Low Stock ⚠
-  </button>
-</div>
+    <span
+      class="status"
+      [class.active]="warehouse?.active"
+      [class.inactive]="!warehouse?.active">
+      {{ warehouse?.active ? 'ACTIVE' : 'INACTIVE' }}
+    </span>
+  </div>
 
-<!-- INVENTORY TAB -->
-<div *ngIf="tab === 'inventory'">
-  <table>
-    <tr>
-      <th>Product ID</th>
-      <th>Category</th>
-      <th>Available</th>
-      <th>Reserved</th>
-    </tr>
-    <tr *ngFor="let i of inventory">
-      <td>{{ i.productId }}</td>
-      <td>{{ i.category }}</td>
-      <td>{{ i.available }}</td>
-      <td>{{ i.reserved }}</td>
-      <td>
-      <button
-  type="button"
-  class="update-btn"
-  (click)="openUpdateModal(i)">
-  Update
-</button>
+  <!-- TABS -->
+  <div class="tabs">
+    <button
+      (click)="loadInventory()"
+      [class.active]="tab === 'inventory'">
+      Inventory
+    </button>
 
-    </td>
-    </tr>
-  </table>
+    <button
+      (click)="loadLowStock()"
+      [class.active]="tab === 'lowStock'">
+      Low Stock ⚠
+    </button>
+  </div>
 
-  <h3>Add Inventory</h3>
-  <form (ngSubmit)="addInventory()">
-    <h2>Product ID:</h2>
-    <input placeholder="Product ID" [(ngModel)]="newInv.productId" name="pid" >
-    <br>
-    <h2>Category:</h2>
-    <input placeholder="Category" [(ngModel)]="newInv.category" name="cat">
-    <br>
-    <h2>Quantity:</h2>
-    <input placeholder="Quantity" [(ngModel)]="newInv.quantity" name="qty">
-    <br>
-    <h2>Low Stock Threshold:</h2>
-    <input placeholder="Low Stock Threshold"
-           [(ngModel)]="newInv.lowStockThreshold" name="lst">
-    <br>
-    <button>Add</button>
-  </form>
+  <!-- INVENTORY TAB -->
+  <div *ngIf="tab === 'inventory'" class="card">
 
-  <p class="error" *ngIf="error">{{ error }}</p>
-</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Category</th>
+          <th>Available</th>
+          <th>Reserved</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-<!-- LOW STOCK TAB -->
-<div *ngIf="tab === 'lowStock'">
-  <table>
-    <tr>
-      <th>Product</th>
-      <th>Category</th>
-      <th>Available</th>
-    </tr>
-    <tr *ngFor="let l of lowStock">
-      <td>{{ l.productId }}</td>
-      <td>{{ l.category }}</td>
-      <td class="danger">{{ l.available }}</td>
-    </tr>
-  </table>
-</div>
+      <tbody>
+        <tr *ngFor="let i of inventory">
+          <td>{{ i.productId }}</td>
+          <td>{{ i.category }}</td>
+          <td>{{ i.available }}</td>
+          <td>{{ i.reserved }}</td>
+          <td>
+            <button
+              class="btn-outline"
+              (click)="openUpdateModal(i)">
+              Update
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<div class="modal-backdrop" *ngIf="showUpdateModal">
-  <div class="modal">
-    <h3>Update Inventory</h3>
+    <!-- ADD INVENTORY -->
+    <h3 class="section-title">Add Inventory</h3>
 
-    <label>Category</label>
-    <input [(ngModel)]="updatePayload.category" />
+    <div class="form-grid">
+      <input
+        type="text"
+        placeholder="Product ID"
+        [(ngModel)]="newInv.productId"
+        name="pid">
 
-    <label>Quantity</label>
-    <input type="number" [(ngModel)]="updatePayload.quantity" />
+      <input
+        type="text"
+        placeholder="Category"
+        [(ngModel)]="newInv.category"
+        name="cat">
 
-    <div class="actions">
-      <button (click)="submitUpdate()">Save</button>
-      <button class="cancel" (click)="closeUpdateModal()">Cancel</button>
+      <input
+        type="number"
+        placeholder="Quantity"
+        [(ngModel)]="newInv.quantity"
+        name="qty">
+
+      <input
+        type="number"
+        placeholder="Low Stock Threshold"
+        [(ngModel)]="newInv.lowStockThreshold"
+        name="lst">
+    </div>
+
+    <button
+      class="btn-primary"
+      (click)="addInventory()">
+      Add Inventory
+    </button>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </div>
+
+  <!-- LOW STOCK TAB -->
+  <div *ngIf="tab === 'lowStock'" class="card">
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Available</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let l of lowStock">
+          <td>{{ l.productId }}</td>
+          <td>{{ l.category }}</td>
+          <td class="danger">{{ l.available }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- UPDATE MODAL -->
+  <div class="modal-backdrop" *ngIf="showUpdateModal">
+    <div class="modal">
+      <h3>Update Inventory</h3>
+
+      <label>Category</label>
+      <input [(ngModel)]="updatePayload.category">
+
+      <label>Quantity</label>
+      <input type="number" [(ngModel)]="updatePayload.quantity">
+
+      <div class="actions">
+        <button
+          class="btn-primary"
+          (click)="submitUpdate()">
+          Save
+        </button>
+
+        <button
+          class="btn-outline"
+          (click)="closeUpdateModal()">
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
+
 </div>
