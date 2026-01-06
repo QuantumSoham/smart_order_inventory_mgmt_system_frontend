@@ -1,22 +1,44 @@
-<h2>Login</h2>
+<div class="login-page">
 
-<form #f="ngForm" (ngSubmit)="login(f)">
-  <input
-    name="email"
-    placeholder="Username or email"
-    [(ngModel)]="model.credential"
-    required />
+  <div class="login-card">
+    <h2>Sign in</h2>
+    <p class="subtitle">Use your account to continue</p>
 
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    [(ngModel)]="model.password"
-    required />
+    <form #f="ngForm" (ngSubmit)="login(f)">
 
-  <button type="submit">Login</button>
-</form>
+      <div class="field">
+        <input
+          name="email"
+          type="text"
+          placeholder="Email or username"
+          [(ngModel)]="model.credential"
+          required />
+      </div>
 
-<p style="color:red" *ngIf="error">{{ error }}</p>
+      <div class="field">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="model.password"
+          required />
+      </div>
 
-<a routerLink="/register">Create account</a>
+      <button type="submit" class="btn-primary">
+        Login
+      </button>
+
+    </form>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <a routerLink="/register" class="register-link">
+      Create a new account
+    </a>
+  </div>
+
+</div>
