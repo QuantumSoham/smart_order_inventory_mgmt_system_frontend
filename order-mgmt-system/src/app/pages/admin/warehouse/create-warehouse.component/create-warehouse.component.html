@@ -1,0 +1,11 @@
+<h2>Create Warehouse</h2>
+
+<form (ngSubmit)="create()">
+  <label>Name</label>
+  <input [(ngModel)]="warehouse.name" name="name" required>
+
+  <label>Location</label>
+  <input [(ngModel)]="warehouse.location" name="location" required>
+
+  <button type="submit">Create</button>
+</form>

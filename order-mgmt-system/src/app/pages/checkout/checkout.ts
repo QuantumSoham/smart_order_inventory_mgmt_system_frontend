@@ -13,14 +13,18 @@ import { RouterLink } from '@angular/router';
 })
 export class CheckoutComponent {
 
+  orderPlaced = false; 
+
   constructor(
     private cartService: CartService,
     private orderService: OrderService
   ) {}
 
   placeOrder(form: any) {
+    if (form.invalid) return;
+
     const payload = {
-      userId: localStorage.getItem("userId") || 2, // hardcoding user id now till i get my rbac api gateway ready
+      userId: localStorage.getItem("userId") || 2,
       warehouseId: this.cartService.getWarehouseId(),
       shippingName: form.value.shippingName,
       shippingPhone: form.value.shippingPhone,
@@ -33,13 +37,19 @@ export class CheckoutComponent {
         quantity: i.quantity
       }))
     };
-    console.log(payload);
+
     this.orderService.placeOrder(payload).subscribe({
-      next: res => {
-        console.log('Order placed', res);
+      next: () => {
         this.cartService.clear();
+        this.orderPlaced = true; // 🔥 show modal
+        form.reset();
       },
       error: err => console.error(err)
     });
   }
+
+  closeModal() {
+    this.orderPlaced = false;
+  }
 }
+

@@ -23,7 +23,6 @@ export class InventoryPage {
   selectedWarehouseId!: number;
   inventory: InventoryView[] = [];
   loading = false;
-
   constructor(
     private inventoryService: InventoryService,
     private productService: ProductService,
@@ -37,6 +36,8 @@ export class InventoryPage {
   }
 
   loadInventory() {
+    this.inventory=[];
+    this.resetCart();
     this.loading = true;
 
     this.inventoryService.getByWarehouse(this.selectedWarehouseId)
@@ -65,6 +66,11 @@ export class InventoryPage {
   this.cartService.setWarehouse(this.selectedWarehouseId);
   this.cartService.add(item);
 }
+
+ resetCart()
+ {
+  this.cartService.clear();
+ }
 }
 //   testpost() {
 

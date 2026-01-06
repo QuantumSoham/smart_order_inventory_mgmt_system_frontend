@@ -1,0 +1,54 @@
+<h2>Warehouses</h2>
+
+<div class="actions-bar">
+  <button class="create-btn" (click)="openCreateModal()">
+    + Create Warehouse
+  </button>
+
+  <button class="create-btn secondary" (click)="load()">
+    Refresh
+  </button>
+</div>
+
+<div class="warehouse-grid">
+  <div
+    class="warehouse-card"
+    *ngFor="let wh of warehouses"
+    (click)="openWarehouse(wh.id)"
+  >
+    <div class="icon">🏭</div>
+    <h3>{{ wh.name }}</h3>
+    <p>{{ wh.location }}</p>
+    <span
+      class="status"
+      [class.active]="wh.active"
+      [class.inactive]="!wh.active"
+    >
+      {{ wh.active ? 'ACTIVE' : 'INACTIVE' }}
+    </span>
+  </div>
+</div>
+
+<!-- CREATE WAREHOUSE MODAL -->
+<div class="modal-backdrop" *ngIf="showCreateModal">
+  <div class="modal">
+    <h3>Create Warehouse</h3>
+
+    <label>Name</label>
+    <input
+      placeholder="BLR-WH-01"
+      [(ngModel)]="newWarehouse.name" />
+
+    <label>Location</label>
+    <input
+      placeholder="Bangalore"
+      [(ngModel)]="newWarehouse.location" />
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <div class="actions">
+      <button (click)="createWarehouse()">Create</button>
+      <button class="cancel" (click)="closeCreateModal()">Cancel</button>
+    </div>
+  </div>
+</div>

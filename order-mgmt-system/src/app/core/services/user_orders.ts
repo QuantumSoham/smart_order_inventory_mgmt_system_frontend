@@ -15,5 +15,13 @@ export class UserOrdersService {
   {
      return this.http.get<any[]>(`${this.baseUrl}/user/${userId}`);
   }
+
+  cancelOrder(orderId: number): Observable<any> {
+  return this.http.put(
+    `${this.baseUrl}/${orderId}/cancel`,
+    {}
+  );
+}
+
   
 }

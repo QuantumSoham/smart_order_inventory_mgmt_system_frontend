@@ -3,7 +3,8 @@ export type OrderStatus =
   | 'APPROVED'
   | 'PACKED'
   | 'SHIPPED'
-  | 'DELIVERED';
+  | 'DELIVERED'
+  | 'CANCELLED';
 
 export interface Order {
   id: number;

@@ -26,6 +26,19 @@
           {{ order.createdAt | date:'medium' }}
         </div>
       </div>
+      <div class="order-footer">
+  <div class="amount">
+    Total Amount
+    <span>₹ {{ order.totalAmount }}</span>
+  </div>
+
+  <button
+    class="cancel-btn"
+    *ngIf="canCancel(order.status)"
+    (click)="openCancelModal(order)">
+    ❌ Cancel Order
+  </button>
+</div>
 
       <span class="status-badge" [ngClass]="getStatusClass(order.status)">
         {{ order.status }}
@@ -56,5 +69,26 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+
+<!-- Cancel Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="showCancelModal">
+  <div class="modal">
+    <h3>Cancel Order</h3>
+    <p>
+      Are you sure you want to cancel
+      <strong>Order #{{ selectedOrder?.id }}</strong>?
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" (click)="closeCancelModal()">
+        No
+      </button>
+      <button class="btn-danger" (click)="confirmCancel()">
+        Yes, Cancel
+      </button>
+    </div>
   </div>
 </div>

@@ -9,8 +9,14 @@ import { RegisterPage } from './pages/auth/register/register.component/register.
 import { UserOrdersComponent } from './pages/user_orders/orders.ts/user_orders';
 import { AdminOrderComponent } from './pages/admin/orders/admin_order_component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard';
+import { WarehouseListComponent } from './pages/admin/warehouse/warehouse-list.component/warehouse-list.component';
+import { CreateWarehouseComponent } from './pages/admin/warehouse/create-warehouse.component/create-warehouse.component';
+import { WarehouseDetailComponent } from './pages/admin/warehouse/warehouse-detail.component/warehouse-detail.component';
 
 export const routes: Routes = [
+  {path: 'warehouses',component: WarehouseListComponent  },
+  {path: 'warehouses/create',component: CreateWarehouseComponent  },
+  {path: 'warehouses/:id',component: WarehouseDetailComponent  },
   { path: 'login', component: LoginPage },
   { path: 'admin/dashboard', component: AdminDashboardComponent },
   {path:'admin-orders', component:AdminOrderComponent},

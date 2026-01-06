@@ -1,30 +1,54 @@
-<div class="inventory-container">
+<div class="inventory-page">
 
+  <!-- HEADER -->
   <div class="inventory-header">
-    <select [(ngModel)]="selectedWarehouseId" (change)="loadInventory()">
-      <option value="">-- Select Warehouse --</option>
-      <option *ngFor="let w of warehouses" [value]="w.id">
-        {{ w.name }}
-      </option>
-    </select>
+    <div class="header-left">
+      <h2>Browse Products</h2>
 
-    <a routerLink="/cart">🛒 View Cart</a>
+      <select [(ngModel)]="selectedWarehouseId" (change)="loadInventory()">
+        <option value="">Select Warehouse</option>
+        <option *ngFor="let w of warehouses" [value]="w.id">
+          {{ w.name }}
+        </option>
+      </select>
+    </div>
+
+    <a routerLink="/cart" class="cart-link">
+      🛒 Cart
+    </a>
   </div>
 
-  <div *ngIf="loading">Loading inventory...</div>
+  <!-- LOADING / EMPTY -->
+  <div *ngIf="loading" class="loading">
+    Loading inventory...
+  </div>
 
-  <div class="inventory-grid">
+  <div *ngIf="!loading && inventory.length === 0" class="empty">
+    No items available in this warehouse
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="inventory-grid" *ngIf="inventory.length > 0">
     <div class="inventory-card" *ngFor="let item of inventory">
-      <img [src]="item.imageUrl">
-      <h3>{{ item.name }}</h3>
-      <p>₹ {{ item.price }}</p>
-      <p>Available: {{ item.available }}</p>
 
-      <button
-        [disabled]="item.available === 0"
-        (click)="addToCart(item)">
-        Add to Cart
-      </button>
+      <div class="image-wrapper">
+        <img [src]="item.imageUrl" alt="{{ item.name }}">
+      </div>
+
+      <div class="card-body">
+        <h3>{{ item.name }}</h3>
+        <p class="price">₹{{ item.price }}</p>
+        <p class="stock">
+          {{ item.available > 0 ? 'In Stock' : 'Out of Stock' }}
+        </p>
+
+        <button
+          [disabled]="item.available === 0"
+          (click)="addToCart(item)">
+          Add to Cart
+        </button>
+      </div>
+
     </div>
   </div>
 

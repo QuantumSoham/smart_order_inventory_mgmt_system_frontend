@@ -37,6 +37,8 @@ export class CartService {
     this.cart$.next([...this.items]);
   }
 
+ 
+
   increment(productId: number) {
     const item = this.items.find(i => i.productId === productId);
     if (item) {

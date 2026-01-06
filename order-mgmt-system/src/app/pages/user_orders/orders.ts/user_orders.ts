@@ -14,6 +14,8 @@ export class UserOrdersComponent implements OnInit {
  orders: any[] = [];
   loading = false;
   error = '';
+showCancelModal = false;
+selectedOrder: any = null;
 
   constructor(private userOrderService: UserOrdersService) {}
 
@@ -54,6 +56,37 @@ getStatusClass(status: string): string {
     case 'DELIVERED': return 'status-delivered';
     default: return '';
   }
+}
+canCancel(status: string): boolean {
+  return status === 'CREATED' || status === 'APPROVED';
+}
+
+openCancelModal(order: any) {
+  this.selectedOrder = order;
+  this.showCancelModal = true;
+}
+
+closeCancelModal() {
+  this.showCancelModal = false;
+  this.selectedOrder = null;
+}
+
+confirmCancel() {
+  if (!this.selectedOrder) return;
+
+  this.userOrderService
+    .cancelOrder(this.selectedOrder.id)
+    .subscribe({
+      next: () => {
+        this.closeCancelModal();
+        this.loadOrders(); // refresh list
+      },
+      error: err => {
+        console.error(err);
+        this.error = 'Failed to cancel order';
+        this.closeCancelModal();
+      }
+    });
 }
 
 }

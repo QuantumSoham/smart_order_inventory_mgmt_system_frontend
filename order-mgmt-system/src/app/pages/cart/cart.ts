@@ -30,5 +30,8 @@ export class CartPage implements OnInit {
 decrement(id: number) {
   this.cartService.decrement(id);
 }
+clearCart() {
+  this.cartService.clear();
+}
 
 }

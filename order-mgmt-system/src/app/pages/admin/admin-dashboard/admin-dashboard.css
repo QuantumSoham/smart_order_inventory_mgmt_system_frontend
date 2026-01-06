@@ -183,6 +183,7 @@ h1 {
 .status-packed { background: #fff3cd; }
 .status-shipped { background: #d1ecf1; }
 .status-delivered { background: #d4edda; }
+.status-cancelled{background:rgb(222, 119, 119);}
 
 table {
   width: 100%;

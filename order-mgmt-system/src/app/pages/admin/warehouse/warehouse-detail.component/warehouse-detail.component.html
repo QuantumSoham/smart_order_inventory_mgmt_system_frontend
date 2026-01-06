@@ -1,0 +1,97 @@
+<h2>{{ warehouse?.name }}</h2>
+
+<div class="meta">
+  <p><b>ID:</b> {{ warehouse?.id }}</p>
+  <p><b>Location:</b> {{ warehouse?.location }}</p>
+  <p><b>Status:</b> {{ warehouse?.active ? 'ACTIVE' : 'INACTIVE' }}</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button (click)="loadInventory()" [class.active]="tab==='inventory'">
+    Inventory
+  </button>
+  <button (click)="tab='lowStock'" [class.active]="tab==='lowStock'">
+    Low Stock ⚠
+  </button>
+</div>
+
+<!-- INVENTORY TAB -->
+<div *ngIf="tab === 'inventory'">
+  <table>
+    <tr>
+      <th>Product ID</th>
+      <th>Category</th>
+      <th>Available</th>
+      <th>Reserved</th>
+    </tr>
+    <tr *ngFor="let i of inventory">
+      <td>{{ i.productId }}</td>
+      <td>{{ i.category }}</td>
+      <td>{{ i.available }}</td>
+      <td>{{ i.reserved }}</td>
+      <td>
+      <button
+  type="button"
+  class="update-btn"
+  (click)="openUpdateModal(i)">
+  Update
+</button>
+
+    </td>
+    </tr>
+  </table>
+
+  <h3>Add Inventory</h3>
+  <form (ngSubmit)="addInventory()">
+    <h2>Product ID:</h2>
+    <input placeholder="Product ID" [(ngModel)]="newInv.productId" name="pid" >
+    <br>
+    <h2>Category:</h2>
+    <input placeholder="Category" [(ngModel)]="newInv.category" name="cat">
+    <br>
+    <h2>Quantity:</h2>
+    <input placeholder="Quantity" [(ngModel)]="newInv.quantity" name="qty">
+    <br>
+    <h2>Low Stock Threshold:</h2>
+    <input placeholder="Low Stock Threshold"
+           [(ngModel)]="newInv.lowStockThreshold" name="lst">
+    <br>
+    <button>Add</button>
+  </form>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>
+
+<!-- LOW STOCK TAB -->
+<div *ngIf="tab === 'lowStock'">
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Category</th>
+      <th>Available</th>
+    </tr>
+    <tr *ngFor="let l of lowStock">
+      <td>{{ l.productId }}</td>
+      <td>{{ l.category }}</td>
+      <td class="danger">{{ l.available }}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-backdrop" *ngIf="showUpdateModal">
+  <div class="modal">
+    <h3>Update Inventory</h3>
+
+    <label>Category</label>
+    <input [(ngModel)]="updatePayload.category" />
+
+    <label>Quantity</label>
+    <input type="number" [(ngModel)]="updatePayload.quantity" />
+
+    <div class="actions">
+      <button (click)="submitUpdate()">Save</button>
+      <button class="cancel" (click)="closeUpdateModal()">Cancel</button>
+    </div>
+  </div>
+</div>
