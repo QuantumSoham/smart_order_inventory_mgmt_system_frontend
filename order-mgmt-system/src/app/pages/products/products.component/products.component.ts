@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product';
@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
   modalMessage = '';
   modalType: 'success' | 'error' = 'success';
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private cdr:ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadProducts();

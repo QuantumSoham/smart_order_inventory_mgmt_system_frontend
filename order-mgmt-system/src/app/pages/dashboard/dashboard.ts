@@ -2,11 +2,12 @@ import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BillingReportsService } from '../../core/services/billing-reports';
 import Chart from 'chart.js/auto';
+import { BillingChatbotComponent } from '../../shared/billing-ai.service/billing-ai.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BillingChatbotComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })

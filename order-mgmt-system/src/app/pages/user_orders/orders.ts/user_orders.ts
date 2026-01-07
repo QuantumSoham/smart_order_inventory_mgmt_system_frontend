@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UserOrdersService } from '../../../core/services/user_orders';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserOrdersComponent implements OnInit {
 showCancelModal = false;
 selectedOrder: any = null;
 
-  constructor(private userOrderService: UserOrdersService) {}
+  constructor(private userOrderService: UserOrdersService, private cdr:ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadOrders();
@@ -38,11 +38,13 @@ selectedOrder: any = null;
       next: res => {
         this.orders = res;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: err => {
         console.error(err);
         this.error = 'Failed to load orders';
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }

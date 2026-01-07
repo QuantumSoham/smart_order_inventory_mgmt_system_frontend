@@ -1,0 +1,17 @@
+<div class="chat-card">
+  <h3>🤖 Ask Billing AI</h3>
+
+  <input
+    [(ngModel)]="question"
+    (keyup.enter)="askAI()"
+    placeholder="Which warehouse has most sales?"
+  />
+
+  <button (click)="askAI()" [disabled]="loading">
+    {{ loading ? 'Thinking…' : 'Ask' }}
+  </button>
+
+  <div class="response" *ngIf="answer">
+    {{ answer }}
+  </div>
+</div>
