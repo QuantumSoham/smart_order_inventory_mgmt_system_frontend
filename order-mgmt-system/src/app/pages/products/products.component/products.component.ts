@@ -44,10 +44,13 @@ export class ProductsComponent implements OnInit {
       next: res => {
         this.products = res;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
+        this.cdr.detectChanges();
         this.openModal('Failed to load products ❌', 'error');
+
       }
     });
   }
