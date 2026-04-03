@@ -1,4 +1,4 @@
- 
+  
 #  Smart Order & Inventory Management System – Angular Frontend
 
 This repository contains the **Angular frontend** for the **Smart Order & Inventory Management System**, designed to interact with a **microservices-based Spring Boot backend**.
